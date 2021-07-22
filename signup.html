@@ -1,0 +1,249 @@
+<!DOCTYPE html>
+<html>
+<head>
+  
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<style>
+* {
+  box-sizing: border-box;
+}
+
+input[type=text], select, textarea {
+  width: 70%;
+  padding: 12px;
+  border: 1px solid #ccc;
+  border-radius: 4px;
+  resize: vertical;
+}
+
+label {
+  padding: 12px 12px 12px 0;
+  display: inline-block;
+}
+
+input[type=submit] {
+  background-color: #4CAF50;
+  color: white;
+  padding: 12px 20px;
+  border: none;
+  border-radius: 4px;
+  cursor: pointer;
+  float: right;
+}
+
+input[type=submit]:hover {
+  background-color: #45a049;
+}
+
+.container {
+  border-radius: 5px;
+  background-color: #f2f2f2;
+  padding: 20px;
+}
+
+.col-25 {
+  float: left;
+  width: 25%;
+  margin-top: 6px;
+}
+
+.col-75 {
+  float: left;
+  width: 75%;
+  margin-top: 6px;
+}
+
+/* Clear floats after the columns */
+.row:after {
+  content: "";
+  display: table;
+  clear: both;
+}
+
+/* Responsive layout - when the screen is less than 600px wide, make the two columns stack on top of each other instead of next to each other */
+@media screen and (max-width: 600px) {
+  .col-25, .col-75, input[type=submit] {
+    width: 100%;
+    margin-top: 0;
+  }
+}
+</style>
+
+<script type="text/javascript">
+  var v=new XMLHttpRequest();
+  function vemail()
+  {
+    var y=document.getElementById("email").value;
+alert(y);
+v.open("post","Email.jsp?email="+y)
+v.onreadystatechange=bringResult();
+v.send();
+//alert(session);
+  }
+
+  function bringResult() {
+  // body...
+  document.getElementById("sp1").style.visibility="visible";
+  if(v.readyState==4 && v.status==200)
+  { 
+    
+  
+ // document.getElementById("sbuttn").style.visibility="visible";  
+   
+    //var i=v.responseText;
+    //alert(i);
+    
+  }
+}
+
+</script>
+<script type="text/javascript">
+  var k=new XMLHttpRequest();
+  function votp()
+  {
+    var x=document.getElementById("eotp").value;
+    k.open("post","everify.jsp?otpvalue="+x)
+    //alert(x);
+    k.onreadystatechange=verotp;
+    k.send();
+  }
+
+  function verotp() {
+    // body...
+    if(k.readyState==4 && k.status==200)
+    {
+      var i =k.responseText;
+      alert(i);
+      if(i==1)
+      {
+          alert("verified");
+          //k.open("post","index.html");
+          
+         document.getElementById("status").value ="1";
+         alert("done");
+
+      }
+      else
+      {
+        //document.getElementById("status").value =0;
+        alert("wrong otp");
+      }
+    }
+  }
+</script>
+
+
+</head>
+<body>
+  
+
+
+<h1><b>Sign Up</b></h1>
+<div class="container">
+  <form action="signupdb.jsp">
+  <div class="row">
+      
+      <div>  
+      <label for="email">Email</label>
+      &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+        <input type="email" id="email" name="email" placeholder="Your first name.." required>
+      <button  id="ver" type="button" onclick="vemail()" >Verify</button>
+      </div>
+      <span  id="sp1" style="visibility: hidden;">
+      &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+      <input type="number"  id="eotp" name="otp" placeholder="Your otp..">
+      <button  id="sbuttn" type="button" onclick="votp()" >Submit</button>
+      <input type="hidden"  id="status"  name="status" value="0">
+    </span>
+    </div>
+
+
+    <br>
+    <div class="row">
+      
+        
+      <label for="fname">First Name</label>
+      
+        <input type="text" id="fname" name="firstname" placeholder="Your first name..">
+      
+    </div>
+    <br>
+    <div class="row">
+      
+        <label for="lname">Last Name</label>
+      
+      
+        <input type="text" id="lname" name="lastname" placeholder="Your last name..">
+      
+    </div>
+    <br>
+    <div class="row">
+      
+        
+      <label for="Country">Country</label>
+      &nbsp;&nbsp;&nbsp;&nbsp;
+        <input type="text" id="country" name="country" placeholder="Your country..">
+      
+    </div>
+    <br>
+    <div class="row">
+      
+        
+      <label for="state">State</label>
+      &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+      
+        <input type="text" id="state" name="state" placeholder="Your state..">
+      
+    </div>
+    <br>
+    <div class="row">
+      
+        
+      <label for="city">City</label>
+      &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+        <input type="text" id="city" name="city" placeholder="Your city..">
+      
+    </div>
+    <br>
+    <div>
+     Date of Birth &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+  <input type="date" name="bday">
+    </div>
+    <br>
+    <div class="row">
+      
+        <label for="password">Password</label>
+      
+      &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; 
+        <input type="password" id="password" name="password" placeholder="Your password..">
+      
+    </div>
+    
+    
+    <br>
+    <div class="row">
+      
+        <label for="gender">Gender</label>
+     
+      
+        <select id="gender" name="gender">
+          <option value="male">Male</option>
+          <option value="female">Female</option>
+          <option value="others">Others</option>
+        </select>
+     
+    </div>
+    
+    <br>
+    
+    <div class="row">
+      <input type="submit" value="Submit">
+    </div>
+  </form>
+</div>
+
+
+
+</body>
+
+</html>

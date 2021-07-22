@@ -1,0 +1,149 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css" integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous">
+<script src="https://code.jquery.com/jquery-3.3.1.slim.min.js" integrity="sha384-q8i/X+965DzO0rT7abK41JStQIAqVgRVzpbzo5smXKp4YfRvH+8abtTE1Pi6jizo" crossorigin="anonymous"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.7/umd/popper.min.js" integrity="sha384-UO2eT0CpHqdSJQ6hJty5KVphtPhzWj9WO1clHTMGa3JDZwrnQq4sF86dIHNDz0W1" crossorigin="anonymous"></script>
+<script src="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.min.js" integrity="sha384-JjSmVgyd0p3pXB1rRibZUAYoIIy6OrQ6VrjIEaFf/nJGzIxFDsf4x0xIM+B07jRM" crossorigin="anonymous"></script>
+
+	<script type="text/javascript">
+		var v=new XMLHttpRequest();
+function sendotp() {
+
+var y=document.getElementById("phone").value;
+alert(y);
+v.open("post","otp.jsp?phone="+y)
+v.onreadystatechange=bringResult;
+v.send();
+  
+}
+function bringResult() {
+	// body...
+	
+	if(v.readyState==4 && v.status==200)
+	{ 
+	document.getElementById("check").style.visibility="visible";  
+	 
+		var i=v.responseText;
+		alert(i);
+		
+	}
+}
+
+</script>
+<script type="text/javascript">
+	var k=new XMLHttpRequest();
+	function verifyotp()
+	{
+		var x=document.getElementById("sotp").value;
+		k.open("get","otpprocess.jsp?otpvalue="+x)
+		//alert(x);
+		k.onreadystatechange=otpresult;
+		k.send();
+	}
+
+	function otpresult() {
+		// body...
+		if(k.readyState==4 && k.status==200)
+		{
+			var i =k.responseText;
+			alert(i);
+			if(i==1)
+			{
+			    window.location.href="signup.html";
+			}
+			else
+			{
+
+				alert("wrong otp");
+			}
+		}
+	}
+</script>
+	<script>
+var acc = document.getElementsByClassName("accordion");
+var i;
+
+for (i = 0; i < acc.length; i++) {
+  acc[i].addEventListener("click", function() {
+    this.classList.toggle("active");
+    var panel = this.nextElementSibling;
+    if (panel.style.display === "block") {
+      panel.style.display = "none";
+    } else {
+      panel.style.display = "block";
+    }
+  });
+}
+</script>
+
+
+
+	<script>
+// Get the modal
+var modal = document.getElementById('id01');
+
+// When the user clicks anywhere outside of the modal, close it
+window.onclick = function(event) {
+    if (event.target == modal) {
+        modal.style.display = "none";
+    }
+}
+</script>
+</head>
+<body>
+	<div class="container">
+		<div class="row">
+			<form style="margin-top: 200px;margin-left: 300px; ">
+				<div class="form-group">
+					<label for="phone"><b>Mobile Number</b></label>
+			    <input type="text" id="phone" placeholder="Enter Mobile No." name="phone" required>
+				<button type="button" onclick="sendotp()">Send Otp</button>
+				</div>
+			 
+      
+			    <span id="check" style="visibility: hidden;">   
+			      <input type="text" id= "sotp" placeholder="Enter OTP..." name="otp" required>
+
+			      <button type="button" onclick="verifyotp()">Verify Otp</button>
+			  	</span>
+			</form>
+			
+		</div>
+		
+	</div>
+
+	 
+
+<div id="id01" class="modal">
+  
+  <form class="modal-content animate">
+    
+      
+     
+
+    <div class="container">
+      <label for="phone"><b>Mobile Number</b></label>
+      <input type="text" id="phone" placeholder="Enter Mobile No." name="phone" required>
+      <br>
+      <button type="button" onclick="sendotp()">Send Otp</button>
+       <br><br>
+      
+       <span id="check" style="visibility: hidden;">   
+      <input type="text" id= "sotp" placeholder="Enter OTP..." name="otp" required>
+      <br>
+      <button type="button" onclick="verifyotp()">Verify Otp</button>
+  </span>
+      
+    </div>
+
+
+   
+    
+
+</form>
+</div>
+     
+
+</body>
+</html>
